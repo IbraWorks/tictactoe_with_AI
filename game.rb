@@ -5,34 +5,29 @@ class Game
   def initialize
     @board = Board.new
     @com = "X" # the computer's marker
-    @hum = "O" # the user's marker
+    @hum = Player.new("Player1", "O")
   end
 
   def start_game
     # start by printing the board
     @board.show_board
-    # #show_board || puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-    puts "Enter [0-8]:"
+
     # loop through until the game was won or tied
     until game_is_over(@board.game_board) || tie(@board.game_board)
-      get_human_spot
+      player_turn_loop
       if !game_is_over(@board.game_board) && !tie(@board.game_board)
         eval_board
       end
     @board.show_board
-    # #show_board ||  puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
     puts "Game over"
   end
 
-  def get_human_spot
-    spot = nil
-    until spot
-      spot = gets.chomp.to_i
-      if @board.game_board[spot] != "X" && @board.game_board[spot] != "O"
-        @board.game_board[spot] = @hum
-      else
-        spot = nil
+  def player_turn_loop
+    loop do
+      player_move = @hum.get_player_move
+      if @board.add_turn(player_move, @hum.type)
+        break
       end
     end
   end
@@ -69,7 +64,7 @@ class Game
         board[as.to_i] = as
         return best_move
       else
-        board[as.to_i] = @hum
+        board[as.to_i] = @hum.type
         if game_is_over(board)
           best_move = as.to_i
           board[as.to_i] = as
