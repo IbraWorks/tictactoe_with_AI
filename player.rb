@@ -1,6 +1,6 @@
 class Player
   attr_accessor :name, :type
-  def initialize(name = "Player 1", type)
+  def initialize(type, name = "Player 1")
     @name = name
     @type = type
   end
