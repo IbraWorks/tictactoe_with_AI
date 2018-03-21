@@ -1,21 +1,26 @@
+require_relative "board.rb"
+require_relative "player.rb"
+
 class Game
   def initialize
-    @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    @board = Board.new
     @com = "X" # the computer's marker
     @hum = "O" # the user's marker
   end
 
   def start_game
     # start by printing the board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    @board.show_board
+    # #show_board || puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     puts "Enter [0-8]:"
     # loop through until the game was won or tied
-    until game_is_over(@board) || tie(@board)
+    until game_is_over(@board.game_board) || tie(@board.game_board)
       get_human_spot
-      if !game_is_over(@board) && !tie(@board)
+      if !game_is_over(@board.game_board) && !tie(@board.game_board)
         eval_board
       end
-      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    @board.show_board
+    # #show_board ||  puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
     puts "Game over"
   end
@@ -24,8 +29,8 @@ class Game
     spot = nil
     until spot
       spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @hum
+      if @board.game_board[spot] != "X" && @board.game_board[spot] != "O"
+        @board.game_board[spot] = @hum
       else
         spot = nil
       end
@@ -35,13 +40,13 @@ class Game
   def eval_board
     spot = nil
     until spot
-      if @board[4] == "4"
+      if @board.game_board[4] == "4"
         spot = 4
-        @board[spot] = @com
+        @board.game_board[spot] = @com
       else
-        spot = get_best_move(@board, @com)
-        if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @com
+        spot = get_best_move(@board.game_board, @com)
+        if @board.game_board[spot] != "X" && @board.game_board[spot] != "O"
+          @board.game_board[spot] = @com
         else
           spot = nil
         end
