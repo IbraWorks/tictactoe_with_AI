@@ -5,7 +5,7 @@ class Board
   end
 
   def show_board
-    puts " #{@game_board[0]} | #{@game_board[1]} | #{@game_board[2]} \n===+===+===\n #{@game_board[3]} | #{@game_board[4]} | #{@game_board[5]} \n===+===+===\n #{@game_board[6]} | #{@game_board[7]} | #{@game_board[8]} \n"
+    puts "\n #{@game_board[0]} | #{@game_board[1]} | #{@game_board[2]} \n===+===+===\n #{@game_board[3]} | #{@game_board[4]} | #{@game_board[5]} \n===+===+===\n #{@game_board[6]} | #{@game_board[7]} | #{@game_board[8]} \n"
   end
 
   def add_turn(position, type)
@@ -41,6 +41,10 @@ class Board
 
   def victory?
     horizontal_vic? || vertical_vic? || diagonal_vic?
+  end
+
+  def tie?
+    @game_board.all? { |s| s == "X" || s == "O" }
   end
 
 end

@@ -15,16 +15,8 @@ class Player
     player_move[0]
   end
 
-  def get_move
-    puts "\n#{@name}, please enter your move (eg 'a1 to b2')"
-    player_move = convert_input_to_move(gets.chomp)
-    while !player_move
-      puts "\nthat doesnt seem right.\nEnter your move in this format ('a1 to b2')"
-      player_move = convert_input_to_move(gets.chomp)
-    end
-    player_move
-  end
-
+  private
+  
   def convert_input_to_move(input)
     player_move = input.scan(/[0-8]/).map { |e| e.to_i  }
     puts "player move : #{player_move}"

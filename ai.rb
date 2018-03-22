@@ -1,5 +1,5 @@
 class Ai
-
+  attr_accessor :name, :type
   def initialize(type, board, opponent, name = "Computer")
     @type = type
     @board = board
