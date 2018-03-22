@@ -16,11 +16,7 @@ class Game
     loop do
       @board.show_board
 
-      if @active_player == @hum
-        player_turn_loop(@active_player)
-      else
-        @com.eval_board
-      end
+      player_turn_loop(@active_player)
 
       if game_is_over?
         @board.show_board

@@ -7,16 +7,16 @@ class Ai
     @name = name
   end
 
-  def eval_board
+  def get_player_move
     spot = nil
     until spot
       if @board.game_board[4] == "4"
         spot = 4
-        @board.game_board[spot] = @type
+        return spot
       else
         spot = get_best_move(@board)
         if @board.game_board[spot] != "X" && @board.game_board[spot] != "O"
-          @board.game_board[spot] = @type
+          return spot
         else
           spot = nil
         end
