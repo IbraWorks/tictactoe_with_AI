@@ -34,13 +34,13 @@ class Ai
     end
     available_spaces.each do |as|
       board.game_board[as.to_i] = @type
-      if board.victory?
+      if board.victory?(@type)
         best_move = as.to_i
         board.game_board[as.to_i] = as
         return best_move
       else
         board.game_board[as.to_i] = @opp.type
-        if board.victory?
+        if board.victory?(@opp.type)
           best_move = as.to_i
           board.game_board[as.to_i] = as
           return best_move

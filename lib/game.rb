@@ -5,14 +5,13 @@ require_relative "ai.rb"
 class Game
   def initialize
     @board = Board.new
-    @hum = Player.new("O")
-    @com = Ai.new("X", @board, @hum) # the ai needs to know about the board and hum's moves
-    @active_player = @hum
+    @player1 = Player.new("O")
+    @player2 = Ai.new("X", @board, @player1) # the ai needs to know about the board and hum's moves
+    @active_player = @player1
   end
 
   def start_game
     # start by printing the board
-
     loop do
       @board.show_board
 
@@ -22,7 +21,6 @@ class Game
         @board.show_board
         break
       end
-
       switch_players
     end
 
@@ -44,21 +42,21 @@ class Game
   end
 
   def check_tie?
-    if @board.tie?
+    if @board.tie?(@active_player.type)
       puts "Tic Tac Tie! \n"
       true
     end
   end
 
   def check_vic?
-    if @board.victory?
+    if @board.victory?(@active_player.type)
       puts "\n\nCongratulations #{@active_player.name}, you win! Here's How:\n"
       true
     end
   end
 
   def switch_players
-    @active_player == @hum ? @active_player = @com : @active_player = @hum
+    @active_player == @player1 ? @active_player = @player2 : @active_player = @player1
   end
 
 end
