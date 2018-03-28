@@ -1,11 +1,68 @@
 class Ai
   attr_accessor :name, :type
+  attr_reader :choice
   def initialize(type, board, opponent, name = "Computer")
     @type = type
     @board = board
     @opp = opponent
     @name = name
   end
+
+  def vic_message
+    puts "\ncongrats #{@name}, you win!\n"
+  end
+
+  def get_player_move
+    minimax(@board, @type)
+    #binding.pry
+    @choice
+  end
+
+  def score(board)
+    if board.victory_type == @type
+      return 10
+    elsif board.victory_type == @opp
+      return -10
+    else
+      return 0
+    end
+  end
+
+  def minimax(board, current_type)
+    return score(board) if board.game_over?
+
+    scores = {}
+    board.available_spaces.each do |move|
+      possible_board = Marshal.load(Marshal.dump(board))
+      possible_board.add_turn(move, current_type)
+      scores[move] = minimax(possible_board, switch_types(current_type))
+    end
+
+    @choice, best_score = best_move(current_type, scores)
+    best_score
+  end
+
+  def best_move(type, scores)
+    if type == @type
+      scores.max_by{|k, v| v}
+    else
+      scores.min_by{|k, v| v}
+    end
+  end
+
+  def switch_types(type)
+    type == @type ? @opp : @type
+  end
+
+end
+
+
+=begin
+
+two methods of attack:
+fixing the over? method in board.rb and using current_type instance variable instead
+using arrays instead of hashes like the website.
+
 
   def get_player_move
     spot = nil
@@ -58,3 +115,5 @@ class Ai
   end
 
 end
+
+=end

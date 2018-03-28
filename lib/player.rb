@@ -15,8 +15,12 @@ class Player
     player_move[0]
   end
 
+  def vic_message
+    puts "congrats #{@name}, you win!"
+  end
+
   private
-  
+
   def convert_input_to_move(input)
     player_move = input.scan(/[0-8]/).map { |e| e.to_i  }
     puts "player move : #{player_move}"
