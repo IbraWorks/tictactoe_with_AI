@@ -1,10 +1,11 @@
 class Ai
 
-  attr_reader :name, :type
-  def initialize(type, board, opponent, name = "Computer")
+  attr_reader :name, :type, :ui
+  def initialize(type, board, opponent, ui, name = "Computer")
     @type = type
     @board = board
     @opp = opponent
+    @ui = ui
     @name = name
   end
 

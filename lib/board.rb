@@ -22,8 +22,6 @@ class Board
   def add_turn(position, type)
     if available_position?(position)
       @game_board[position] = type
-    else
-      puts "\n That position has already been filled.\nChoose somewhere else\n"
     end
   end
 

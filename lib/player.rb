@@ -1,15 +1,15 @@
 class Player
-  attr_accessor :name, :type
-  def initialize(type, name = "Player 1")
+  attr_reader :name, :type, :ui
+  def initialize(type, ui, name = "Player 1")
+    @ui = ui
     @name = name
     @type = type
   end
 
   def get_player_move
-    puts "\n#{@name}, please enter where you would like to play [0-8]: \n"
     player_move = convert_input_to_move(gets.chomp)
     while !player_move
-      puts "That doesn't seem right. \nplease input a number between 0 and 8\n"
+      @ui.out_of_bounds
       player_move = convert_input_to_move(gets.chomp)
     end
     player_move[0]
