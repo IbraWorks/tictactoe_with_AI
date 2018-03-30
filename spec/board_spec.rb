@@ -54,23 +54,21 @@ describe Board do
     end
 
     context "Given tie" do
-      it "should return false for both 'X' and 'O' " do
+      it "should return false" do
         board.game_board = ["X","X","O","O","X","X","X","O","O"]
-        expect(board.victory?).to be(false)
         expect(board.victory?).to be(false)
       end
     end
 
     context "Given no win condition has been met" do
-      it "returns false for both 'X' and 'O' " do
+      it "returns false " do
         board.game_board = ["0", "1", "2", "3", "X", "5", "6", "7", "O"]
-        expect(board.victory?).to be(false)
         expect(board.victory?).to be(false)
       end
     end
 
     context "Given start of the game" do
-      it "returns false for both 'X' and 'O' " do
+      it "returns false " do
         board.game_board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
         expect(board.victory?).to be(false)
       end
@@ -86,9 +84,8 @@ describe Board do
 
   describe "#tie" do
     context "Given a tied board" do
-      it "returns true for both types" do
+      it "returns true" do
         board.game_board  =["X","X","O","O","X","X","X","O","O"]
-        expect(board.tie?).to be(true)
         expect(board.tie?).to be(true)
       end
     end
@@ -96,6 +93,13 @@ describe Board do
     context "Given full board that has a win condition" do
       it "returns false for the winning type" do
         board.game_board  = ["O","X","X","X","O","X","O","X","O"]
+        expect(board.tie?).to be(false)
+      end
+    end
+
+    context "Given board with no win condition that isnt tied" do
+      it "returns false" do
+        board.game_board  = ["X", "1", "2", "3", "X", "5", "6", "7", "O"]
         expect(board.tie?).to be(false)
       end
     end

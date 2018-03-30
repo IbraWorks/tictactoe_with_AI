@@ -1,15 +1,11 @@
 class Ai
-  attr_accessor :name, :type
-  attr_reader :choice
+
+  attr_reader :name, :type
   def initialize(type, board, opponent, name = "Computer")
     @type = type
     @board = board
     @opp = opponent
     @name = name
-  end
-
-  def vic_message
-    puts "\ncongrats #{@name}, you win!\n"
   end
 
   def get_player_move
@@ -18,28 +14,31 @@ class Ai
     @choice
   end
 
-  def score(board)
-    if board.victory_type == @type
-      return 10
-    elsif board.victory_type == @opp
-      return -10
-    else
-      return 0
-    end
-  end
+  private
 
-  def minimax(board, current_type)
-    return score(board) if board.game_over?
-
+  def minimax(board, current_type, depth = 0)
+    return score(board, depth) if board.game_over?
+    depth += 1
     scores = {}
     board.available_spaces.each do |move|
+      #copy the board so that you dont alter the original state
       possible_board = Marshal.load(Marshal.dump(board))
       possible_board.add_turn(move, current_type)
-      scores[move] = minimax(possible_board, switch_types(current_type))
+      scores[move] = minimax(possible_board, switch_types(current_type), depth)
     end
 
     @choice, best_score = best_move(current_type, scores)
     best_score
+  end
+
+  def score(board, depth)
+    if board.victory_type == @type
+      return 10 - depth
+    elsif board.victory_type == @opp
+      return depth - 10
+    else
+      return 0
+    end
   end
 
   def best_move(type, scores)

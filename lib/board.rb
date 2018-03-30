@@ -22,47 +22,17 @@ class Board
   def add_turn(position, type)
     if available_position?(position)
       @game_board[position] = type
-    end
-  end
-
-  def available_position?(position)
-    if @game_board[position] != "X" && @game_board[position] != "O"
-      true
     else
       puts "\n That position has already been filled.\nChoose somewhere else\n"
-      false
     end
-  end
-
-  def victory_combos
-    WIN_CONDITIONS.each { |cond|
-      if @game_board[cond[0]] == @game_board[cond[1]] && @game_board[cond[1]] == @game_board[cond[2]]
-        return cond unless @game_board[cond[0]] != "X" && @game_board[cond[0]] != "O"
-      end
-    }
-    false
-  end
-
-  def victory?
-    combo = victory_combos
-    #binding.pry
-    combo ? true : false
   end
 
   def available_spaces
     as = []
     @game_board.each_index do |i|
-      as << i if empty_space?(i)
+      as << i if available_position?(i)
     end
     as
-  end
-
-  def empty_space?(space)
-    @game_board[space] != "X" && @game_board[space] != "O"
-  end
-
-  def tie?
-    !victory? && available_spaces.empty?
   end
 
   def game_over?
@@ -75,5 +45,27 @@ class Board
     combo ? @game_board[combo[0]] : false
   end
 
+
+  def victory_combos
+    WIN_CONDITIONS.each { |cond|
+      if @game_board[cond[0]] == @game_board[cond[1]] && @game_board[cond[1]] == @game_board[cond[2]]
+        return cond unless @game_board[cond[0]] != "X" && @game_board[cond[0]] != "O"
+      end
+    }
+    false
+  end
+
+  def available_position?(position)
+    @game_board[position] != "X" && @game_board[position] != "O"
+  end
+
+  def tie?
+    !victory? && available_spaces.empty?
+  end
+
+  def victory?
+    combo = victory_combos
+    combo ? true : false
+  end
 
 end

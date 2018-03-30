@@ -20,7 +20,7 @@ class Game
 
       if finished?
         @board.show_board
-        @active_player.type == @board.victory_type ? @active_player.vic_message : tie_message
+        @active_player.type == @board.victory_type ? vic_message(@active_player) : tie_message
         break
       end
       switch_players
@@ -41,8 +41,12 @@ class Game
     @board.game_over?
   end
 
+  def vic_message(active_player)
+    puts "\ncongrats #{active_player.name}, you win!\n"
+  end
+
   def tie_message
-      puts "\n Tic Tac Tie! \n"
+    puts "\n Tic Tac Tie! \n"
   end
 
   def switch_players
