@@ -10,6 +10,8 @@ class Ai
   end
 
   def get_player_move
+    @ui.computer_message(@name)
+    sleep(1)
     minimax(@board, @type)
     #binding.pry
     @choice

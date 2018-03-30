@@ -19,6 +19,10 @@ class UserInterface
     @type_of_ui.whos_turn(player)
   end
 
+  def computer_message(name)
+    @type_of_ui.computer_message(name)
+  end
+
   def vic_message(player)
     @type_of_ui.vic_message(player)
   end
@@ -37,6 +41,30 @@ class UserInterface
 
   def unavailable_position
     @type_of_ui.unavailable_position
+  end
+
+  def pick_your_type
+    @type_of_ui.pick_your_type
+  end
+
+  def options_error
+    @type_of_ui.options_error
+  end
+
+  def pick_the_players
+    @type_of_ui.pick_the_players
+  end
+
+  def get_name
+    @type_of_ui.get_name
+  end
+
+  def get_second_name
+    @type_of_ui.get_second_name
+  end
+
+  def show_player_order(active_player)
+    @type_of_ui.show_player_order(active_player)
   end
 
 

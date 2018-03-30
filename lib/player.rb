@@ -12,13 +12,13 @@ class Player
       @ui.out_of_bounds
       player_move = convert_input_to_move(gets.chomp)
     end
-    player_move[0]
+    player_move[0]-1
   end
 
   private
 
   def convert_input_to_move(input)
-    player_move = input.scan(/[0-8]/).map { |e| e.to_i  }
+    player_move = input.scan(/[1-9]/).map { |e| e.to_i  }
     #puts "player move : #{player_move}"
     valid_input?(player_move) ? player_move : false
   end

@@ -4,13 +4,14 @@ require_relative "ai.rb"
 require_relative "ui.rb"
 require "pry"
 class Game
-
-  def initialize
+  attr_reader :active_player
+  def initialize(board, player1, player2)
     @ui = UserInterface.new
-    @board = Board.new
-    @player1 = Player.new("O", @ui)
-    @player2 = Ai.new("X", @board, @player1.type, @ui) # the ai needs to know about the board and hum's moves
+    @board = board
+    @player1 = player1
+    @player2 = player2
     @active_player = @player1
+    #binding.pry
   end
 
   def start_game
@@ -26,6 +27,7 @@ class Game
         @active_player.type == @board.victory_type ? @ui.vic_message(@active_player) : @ui.tie_message
         break
       end
+
       switch_players
     end
 
@@ -52,5 +54,5 @@ class Game
 
 end
 
-game = Game.new
-game.start_game
+#game = Game.new
+#game.start_game

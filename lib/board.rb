@@ -1,7 +1,7 @@
 class Board
   attr_accessor :game_board
   def initialize
-    @game_board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    @game_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   end
 
   WIN_CONDITIONS = [
