@@ -1,7 +1,7 @@
 require_relative "ui.rb"
 require_relative "game.rb"
 class GameSetup
-  attr_reader :current_game
+  attr_reader :current_game, :ui
   def initialize
     @ui = UserInterface.new
     @board = Board.new
@@ -69,7 +69,7 @@ class GameSetup
     order = gets.chomp.to_i
     unless order == 1 || order == 2
       @ui.options_error
-      show_player_order
+      show_player_order(active_player)
     end
     if order == 2
       @current_game.switch_players
@@ -78,6 +78,20 @@ class GameSetup
 
   def begin_game
     @current_game.start_game
+  end
+
+  def play_again
+    @ui.play_again_message
+    answer = gets.chomp.to_i
+    if (answer != 1 && answer != 2)
+      puts "test1"
+      @ui.options_error
+      play_again
+    else
+      puts "answer: #{answer}"
+      return answer
+    end
+    #binding.pry
   end
 
 

@@ -67,5 +67,17 @@ class UserInterface
     @type_of_ui.show_player_order(active_player)
   end
 
+  def play_again_message
+    @type_of_ui.play_again_message
+  end
+
+  def goodbye_message
+    @type_of_ui.goodbye_message
+  end
+
+  def restart_game_message
+    @type_of_ui.restart_game_message
+  end
+
 
 end

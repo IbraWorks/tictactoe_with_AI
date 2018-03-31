@@ -54,7 +54,7 @@ class Console
   end
 
   def options_error
-    puts "Error. Please one of select the following options: \n"
+    puts "Error. Please read the instructions carefully: \n"
   end
 
   def pick_the_players
@@ -71,6 +71,21 @@ class Console
 
   def show_player_order(active_player)
     puts "\n#{active_player.name} will go first. Enter 1 if that's ok, and 2 if you would like to switch the starting player."
+  end
+
+  def play_again_message
+    puts "\nWould you like to play again?\nPress 1 for yes or 2 for no\n"
+  end
+
+  def goodbye_message
+    puts "\nHope you had fun. Goodbye!"
+  end
+
+  def restart_game_message
+    puts "\nOk, let's boot up another game"
+    sleep(2)
+    puts "Loading... (hire me *cough cough*)"
+    sleep(2)
   end
 
 end

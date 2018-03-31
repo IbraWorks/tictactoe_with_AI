@@ -15,22 +15,18 @@ class Game
   end
 
   def start_game
-
     # start by printing the board
     loop do
       @board.show_board
       @ui.whos_turn(@active_player)
       player_turn_loop(@active_player)
-
       if finished?
         @ui.show_board(@board)
         @active_player.type == @board.victory_type ? @ui.vic_message(@active_player) : @ui.tie_message
         break
       end
-
       switch_players
     end
-
   end
 
   def player_turn_loop(active_player)
@@ -51,7 +47,6 @@ class Game
   def switch_players
     @active_player == @player1 ? @active_player = @player2 : @active_player = @player1
   end
-
 end
 
 #game = Game.new
