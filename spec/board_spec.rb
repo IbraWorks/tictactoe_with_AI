@@ -76,7 +76,7 @@ describe Board do
 
     context "Given after one turn" do
       it "returns false" do
-        board.game_board = ["0", "1", "2", "3", "0", "5", "6", "7", "8"]
+        board.game_board = ["0", "1", "2", "3", "O", "5", "6", "7", "8"]
         expect(board.victory?).to be(false)
       end
     end

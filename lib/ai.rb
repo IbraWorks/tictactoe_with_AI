@@ -17,8 +17,6 @@ class Ai
     @choice
   end
 
-  private
-
   def minimax(board, current_type, depth = 0)
     return score(board, depth) if board.game_over?
     depth += 1
