@@ -110,6 +110,7 @@ describe Board do
       it "returns true" do
         board.game_board  = ["O","X","X","X","4","X","O","X","O"]
         expect(board.available_position?(4)).to be(true)
+
       end
     end
 
@@ -134,6 +135,26 @@ describe Board do
       expect(board.game_board).to eql(["O","X","X","X","O","X","O","X","O"])
     end
   end
+
+  describe "#victory_type" do
+    context "when a type has won" do
+      it "returns the type that won" do
+        board.game_board = ["X","X","X","X","O","X","O","X","O"]
+        expect(board.victory_type).to eql("X")
+        board.game_board = ["O","X","X","O","X","O","O","O","X"]
+        expect(board.victory_type).to eql("O")
+      end
+    end
+  end
+
+  describe "#available_spaces" do
+    it "returns array of available indicies on the board" do
+      board.game_board = ["0","1","X","O","X","O","O","O","X"]
+      expect(board.available_spaces).to eql([0,1])
+    end
+  end
+
+
 
 
 end
