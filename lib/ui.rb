@@ -1,6 +1,10 @@
 require_relative "console.rb"
 
 class UserInterface
+  #this class handles the ui, so that it is not coupled tightly with the
+  #game engine class. and takes a parameter type_of_ui this is so the UI could
+  #easily be changed. I.e if you wanted to change the interface to be used on
+  #something other than a console, you could so easily by changing type_of_ui.
   attr_reader :type_of_ui
 
   def initialize(type_of_ui = Console.new)

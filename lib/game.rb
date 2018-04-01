@@ -4,6 +4,8 @@ require_relative "ai.rb"
 require_relative "ui.rb"
 require "pry"
 class Game
+  #this class acts like the 'game engine', allowing the user to make a move
+  #checking if the game is over and switching players accordingly
   attr_reader :active_player
   def initialize(board, player1, player2)
     @ui = UserInterface.new
@@ -14,10 +16,11 @@ class Game
     #binding.pry
   end
 
+  #loop for one match of a game
   def start_game
     # start by printing the board
     loop do
-      @board.show_board
+      @ui.show_board(@board)
       @ui.whos_turn(@active_player)
       player_turn_loop(@active_player)
       if finished?
@@ -29,6 +32,8 @@ class Game
     end
   end
 
+  #loop for getting player move input. will only break once player picks an
+  #available_position on the game_board
   def player_turn_loop(active_player)
     loop do
       player_move = active_player.get_player_move
@@ -48,6 +53,3 @@ class Game
     @active_player == @player1 ? @active_player = @player2 : @active_player = @player1
   end
 end
-
-#game = Game.new
-#game.start_game

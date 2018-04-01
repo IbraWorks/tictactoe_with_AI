@@ -1,10 +1,15 @@
 class Ai
-
-  attr_reader :name, :type, :ui
+  #Ai class handles the logical approach the computer makes when choosing
+  #where to play
+  #Ai uses minimax algorithm to ensure it always wins or at least draws
+  #it iterates through all the best potential moves (for both players) and
+  #gives each a weight, depending on if the final game-state results
+  #in a loss/draw/win for the ai, picking the most optimal choice for the ai.
+  attr_reader :name, :type
   def initialize(type, board, opponent, ui, name = "Computer")
     @type = type
     @board = board
-    @opp = opponent
+    @opp = opponent #opponent's type
     @ui = ui
     @name = name
   end
@@ -13,16 +18,25 @@ class Ai
     @ui.computer_message(@name)
     sleep(1)
     minimax(@board, @type)
-    #binding.pry
     @choice
   end
-
+=begin
+with a rigged board, where the ai is destined to lose, the algorithm doesn't
+pick the best move possible and delay the inevitable. essentially, if all potential
+moves eventually result in a loss for the ai then they all carry the same score,
+and therefore the algorithm wont care about delaying the inevitable and picking
+the obvious move to delay the loss. 'depth' represents the number of turns
+it takes to get the game_over state. the score is adjusted by the depth to ensure that
+the algorithm will prolong the game as much as possible if it is given a rigged
+board and failure is inevitable
+=end
   def minimax(board, current_type, depth = 0)
     return score(board, depth) if board.game_over?
     depth += 1
     scores = {}
     board.available_spaces.each do |move|
       #copy the board so that you dont alter the original state
+      #uses object marshalling to create a deep clone of the @board instance
       possible_board = Marshal.load(Marshal.dump(board))
       possible_board.add_turn(move, current_type)
       scores[move] = minimax(possible_board, switch_types(current_type), depth)
@@ -58,11 +72,9 @@ end
 
 
 =begin
-
-two methods of attack:
-fixing the over? method in board.rb and using current_type instance variable instead
-using arrays instead of hashes like the website.
-
+  I left the previous ai code here commented out because it could potentially
+  be used as a 'medium' mode when challenging the computer. It's good but doesnt
+  guarantee the Ai will always win/draw.
 
   def get_player_move
     spot = nil
