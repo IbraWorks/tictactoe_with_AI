@@ -12,8 +12,10 @@ def run_a_session
   if options == 1
     game.ui.restart_game_message
     run_a_session
+  elsif options == 2
+    game.ui.goodbye_message
+    exit
   end
-  game.ui.goodbye_message
 end
 
 run_a_session
