@@ -5,8 +5,8 @@ class GameSetup
   # for the user
 
   attr_reader :current_game, :ui
-  def initialize
-    @ui = UserInterface.new
+  def initialize(ui)
+    @ui = ui
     @board = Board.new
     @current_game = nil
     @type = "X"

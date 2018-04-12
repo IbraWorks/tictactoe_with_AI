@@ -3,7 +3,7 @@ require "pry"
 
 def run_a_session
 
-  game = GameSetup.new
+  game = GameSetup.new(UserInterface.new)
   game.intro
   game.setup_game
   game.show_player_order(game.current_game.active_player)

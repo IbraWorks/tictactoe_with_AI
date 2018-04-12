@@ -83,5 +83,9 @@ class UserInterface
     @type_of_ui.restart_game_message
   end
 
+  def wait(seconds)
+    @type_of_ui.wait(seconds)
+  end
+
 
 end

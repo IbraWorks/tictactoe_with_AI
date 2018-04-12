@@ -16,7 +16,7 @@ class Ai
 
   def get_player_move
     @ui.computer_message(@name)
-    sleep(1)
+    @ui.wait(1)
     minimax(@board, @type)
     @choice
   end

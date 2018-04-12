@@ -40,7 +40,7 @@ class Console
   end
 
   def out_of_bounds
-    puts "\nThat doesn't seem right. Please input a number between 0 and 8\n".red
+    puts "\nThat doesn't seem right. Please input a number between 1 and 9\n".red
   end
 
   def unavailable_position
@@ -81,9 +81,13 @@ class Console
 
   def restart_game_message
     puts "\nOk, let's boot up another game".light_blue
-    sleep(2)
+    wait(2)
     puts "Loading... (hire me *cough cough*)".green
-    sleep(2)
+    wait(1)
+  end
+
+  def wait(seconds)
+    sleep(seconds)
   end
 
 end
