@@ -31,7 +31,7 @@ describe Ai do
       end
     end
 
-    context "givne board where ai has drawn" do
+    context "given board where ai has drawn" do
       before(:each) do
         allow(board).to receive(:victory_type).and_return(false)
       end

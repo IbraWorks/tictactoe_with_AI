@@ -15,68 +15,67 @@ class Console
   end
 
   def instructions
-    puts "Win the game by getting three in a row (vertically, horizontally, or diagonally).\nTo enter your mark on a position, just type in the number matching the position on the\nboard and press enter (e.g, 5 is in the middle, so type 5 then hit enter to go in the middle)."
-    puts "Good luck, and have fun!\n\n"
+    print "Win the game by getting three in a row (vertically, horizontally, or diagonally).\nTo enter your mark on a position, just type in the number matching the position on the\nboard and press enter (e.g, 5 is in the middle, so type 5 then hit enter to go in the middle). \nGood luck, and have fun!\n\n\n"
   end
 
   def whos_turn(player)
-    puts "\n\n#{player.name}, it's your turn. please enter an available position:\n ".light_blue
+    print "\n\n#{player.name}, it's your turn. please enter an available position:\n\n ".light_blue
   end
 
   def computer_message(name)
-    puts "#{name} is thinking... ".light_blue
+    print "#{name} is thinking... \n".light_blue
   end
 
   def vic_message(player)
-    puts "\n\nCongratulations #{player.name}, You win!".green
+    print "\n\nCongratulations #{player.name}, You win!\n".green
   end
 
   def tie_message
-    puts "\nTic Tac Tie! \n...it took me a week to come up with that pun :'( \n".light_blue
+    print "\nTic Tac Tie! \n...it took me a week to come up with that pun :'( \n\n".light_blue
   end
 
   def show_board(board)
-    puts "\n\n #{board.game_board[0]} | #{board.game_board[1]} | #{board.game_board[2]} \n===+===+===\n #{board.game_board[3]} | #{board.game_board[4]} | #{board.game_board[5]} \n===+===+===\n #{board.game_board[6]} | #{board.game_board[7]} | #{board.game_board[8]} \n"
+    print "\n\n #{board.game_board[0]} | #{board.game_board[1]} | #{board.game_board[2]} \n===+===+===\n #{board.game_board[3]} | #{board.game_board[4]} | #{board.game_board[5]} \n===+===+===\n #{board.game_board[6]} | #{board.game_board[7]} | #{board.game_board[8]} \n\n"
   end
 
   def out_of_bounds
-    puts "\nThat doesn't seem right. Please input a number between 1 and 9\n".red
+    print "\nThat doesn't seem right. Please input a number between 1 and 9\n\n".red
   end
 
   def unavailable_position
-    puts "\nThat position has already been filled.\nChoose somewhere else\n".red
+    print "\nThat position has already been filled.\nChoose somewhere else\n\n".red
   end
 
   def pick_your_type
-    puts "\nDo you want to be X or O?\nPlease press 1 for X or 2 for O: \n".light_blue
+    print "\nDo you want to be X or O?\nPlease press 1 for X or 2 for O: \n\n".light_blue
   end
 
   def options_error
-    puts "Error. Please read the instructions carefully:".red
+    print "Error. Please read the instructions carefully:\n".red
   end
 
   def pick_the_players
-    puts "\nThere are three options:\nPress 1 for Human vs Human;\nPress 2 for Human vs Computer;\nPress 3 for Computer vs Computer".light_blue
+    print "\nThere are three options:\nPress 1 for Human vs Human;\nPress 2 for Human vs Computer;\nPress 3 for Computer vs Computer\n".light_blue
   end
 
   def get_name
-    puts "\nHi first player, what is your name:\n"
+    print "\nHi first player, what is your name:\n\n"
   end
 
   def get_second_name
-    puts "And what is the name of your challenger:\n"
+    print "And what is the name of your challenger:\n\n"
   end
 
   def show_player_order(active_player)
-    puts "\n#{active_player.name} will go first. Enter 1 if that's ok, and 2 if you would like to switch the starting player."
+    print "\n#{active_player.name} will go first. Enter 1 if that's ok, and 2 if you would like to switch the starting player.\n"
   end
 
   def play_again_message
-    puts "\nWould you like to play again?\nPress 1 for yes or 2 for no".light_blue
+    print "\nWould you like to play again?\nPress 1 for yes or 2 for no\n".light_blue
   end
 
   def goodbye_message
-    puts "\nHope you had fun. Goodbye!".light_blue
+    print "\nHope you had fun. Goodbye!\n".light_blue
   end
 
   def restart_game_message
