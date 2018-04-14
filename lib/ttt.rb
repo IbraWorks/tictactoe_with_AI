@@ -3,17 +3,14 @@ require "pry"
 
 def run_a_session
 
-  game = GameSetup.new(UserInterface.new)
-  game.intro
-  game.setup_game
-  game.show_player_order(game.current_game.active_player)
-  game.begin_game
-  options = game.play_again
+  game_setup = GameSetup.new(UserInterface.new)
+  game_setup.setup_game
+  options = game_setup.play_again
   if options == 1
-    game.ui.restart_game_message
+    game_setup.ui.restart_game_message
     run_a_session
   elsif options == 2
-    game.ui.goodbye_message
+    game_setup.ui.goodbye_message
     exit
   end
 end

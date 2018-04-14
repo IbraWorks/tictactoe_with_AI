@@ -7,8 +7,8 @@ class Game
   #this class acts like the 'game engine', allowing the user to make a move
   #checking if the game is over and switching players accordingly
   attr_reader :active_player
-  def initialize(board, player1, player2)
-    @ui = UserInterface.new
+  def initialize(board, player1, player2, ui)
+    @ui = ui
     @board = board
     @player1 = player1
     @player2 = player2
@@ -25,19 +25,25 @@ class Game
       player_turn_loop(@active_player)
       if finished?
         @ui.show_board(@board)
-        @active_player.type == @board.victory_type ? @ui.vic_message(@active_player) : @ui.tie_message
+        @active_player.player_type == @board.victory_type ? @ui.vic_message(@active_player) : @ui.tie_message
         break
       end
       switch_players
     end
   end
 
+  def switch_players
+    @active_player == @player1 ? @active_player = @player2 : @active_player = @player1
+  end
+
+  private
+
   #loop for getting player move input. will only break once player picks an
   #available_position on the game_board
   def player_turn_loop(active_player)
     loop do
       player_move = active_player.get_player_move
-      if @board.add_turn(player_move, active_player.type)
+      if @board.add_turn(player_move, active_player.player_type)
         break
       else
         @ui.unavailable_position
@@ -49,7 +55,4 @@ class Game
     @board.game_over?
   end
 
-  def switch_players
-    @active_player == @player1 ? @active_player = @player2 : @active_player = @player1
-  end
 end
