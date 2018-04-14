@@ -1,5 +1,4 @@
 class Player
-  #This class holds player info, and handles input for the player moves.
   attr_reader :name, :player_type, :ui
   def initialize(player_type, ui, name = "Player 1")
     @ui = ui
@@ -17,13 +16,9 @@ class Player
   end
 
   private
-  #i used regex to handle input rather than simple if statements etc because
-  #it got annoying when playing an my fingers would press 1 and a letter by accident
-  #so I'd press 1q and get an error message. This way, if I do that the game recognises
-  #I meant 1 and the input is handled a bit more gracefully.
+
   def convert_input_to_move(input)
     player_move = input.scan(/[1-9]/).map { |e| e.to_i  }
-    #puts "player move : #{player_move}"
     valid_input?(player_move) ? player_move : false
   end
 

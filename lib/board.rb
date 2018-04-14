@@ -38,6 +38,7 @@ class Board
     combo ? @game_board[combo[0]] : false
   end
 
+  private
 
   def victory_combos
     WIN_CONDITIONS.each { |cond|

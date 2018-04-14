@@ -1,8 +1,6 @@
 require_relative "ui.rb"
 require_relative "game.rb"
-class GameSetup
-  #this class acts almost as a menu class, setting up the correct mode and settings
-  # for the user
+class GameManager
 
   attr_reader :game, :ui
   def initialize(ui)
@@ -20,7 +18,6 @@ class GameSetup
     begin_game
   end
 
-  #gives user option to play again
   def play_again
     @ui.play_again_message
     answer = gets.chomp.to_i
@@ -50,7 +47,6 @@ class GameSetup
     end
   end
 
-  #user selects the game mode they want to use (hum vs hum, hum vs comp, ai vs ai)
   def get_mode
     @ui.pick_the_players
     mode = gets.chomp.to_i
@@ -61,7 +57,6 @@ class GameSetup
     get_mode
   end
 
-  #user selects the type they want to use
   def get_type
     @ui.pick_your_type
     answer = gets.chomp.to_i

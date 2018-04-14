@@ -1,6 +1,6 @@
 require "colorize"
 class Console
-  #handles ui for use in the terminal
+
   def title
     puts "\n
 
