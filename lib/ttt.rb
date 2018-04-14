@@ -1,4 +1,4 @@
-require_relative "game_setup.rb"
+require_relative "game_manager.rb"
 require "pry"
 
 def run_a_session

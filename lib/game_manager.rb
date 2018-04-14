@@ -2,7 +2,7 @@ require_relative "ui.rb"
 require_relative "game.rb"
 class GameManager
 
-  attr_reader :game, :ui
+  attr_reader :game, :ui, :board
   def initialize(ui)
     @ui = ui
     @board = Board.new
