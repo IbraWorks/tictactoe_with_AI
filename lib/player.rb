@@ -1,16 +1,15 @@
 class Player
-  attr_reader :name, :player_type, :ui
-  def initialize(player_type, ui, name = "Player 1")
-    @ui = ui
+  attr_reader :name, :player_type
+  def initialize(player_type, name = "Player 1")
     @name = name
     @player_type = player_type
   end
 
-  def get_player_move
-    player_move = convert_input_to_move(gets.chomp)
+  def get_player_move(ui)
+    player_move = convert_input_to_move(ui.retrieve_input)
     while !player_move
       @ui.out_of_bounds
-      player_move = convert_input_to_move(gets.chomp)
+      player_move = convert_input_to_move(ui.retrieve_input)
     end
     player_move[0]-1
   end

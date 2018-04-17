@@ -1,17 +1,16 @@
 class Ai
 
   attr_reader :name, :player_type
-  def initialize(player_type, board, opponent_type, ui, name = "Computer")
+  def initialize(player_type, board, opponent_type, name = "Computer")
     @player_type = player_type
     @board = board
     @opponent_type = opponent_type
-    @ui = ui
     @name = name
   end
 
-  def get_player_move
-    @ui.computer_message(@name)
-    @ui.wait(1)
+  def get_player_move(ui)
+    ui.computer_message(@name)
+    ui.wait(1)
     minimax(@board, @player_type)
     @choice
   end

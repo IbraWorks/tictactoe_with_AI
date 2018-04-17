@@ -16,7 +16,7 @@ describe GameManager do
       end
 
       it "plays a game until game is over" do
-        game_manager.setup_game
+        game_manager.setup_game(ui)
         expect(game_manager.board.game_over?).to be(true)
       end
     end

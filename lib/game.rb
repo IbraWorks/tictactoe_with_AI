@@ -6,8 +6,7 @@ require "pry"
 class Game
 
   attr_reader :active_player
-  def initialize(board, player1, player2, ui)
-    @ui = ui
+  def initialize(board, player1, player2)
     @board = board
     @player1 = player1
     @player2 = player2
@@ -15,14 +14,14 @@ class Game
 
   end
 
-  def start_game
+  def start_game(ui)
     loop do
-      @ui.show_board(@board)
-      @ui.whos_turn(@active_player)
-      player_turn_loop(@active_player)
+      ui.show_board(@board)
+      ui.whos_turn(@active_player)
+      player_turn_loop(@active_player, ui)
       if finished?
-        @ui.show_board(@board)
-        @active_player.player_type == @board.victory_type ? @ui.vic_message(@active_player) : @ui.tie_message
+        ui.show_board(@board)
+        @active_player.player_type == @board.victory_type ? ui.vic_message(@active_player) : ui.tie_message
         break
       end
       switch_players
@@ -35,13 +34,13 @@ class Game
 
   private
 
-  def player_turn_loop(active_player)
+  def player_turn_loop(active_player, ui)
     loop do
-      player_move = active_player.get_player_move
+      player_move = active_player.get_player_move(ui)
       if @board.add_turn(player_move, active_player.player_type)
         break
       else
-        @ui.unavailable_position
+        ui.unavailable_position
       end
     end
   end

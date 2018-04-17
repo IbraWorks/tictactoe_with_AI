@@ -15,7 +15,7 @@ class GameManager
     mode = get_mode(ui)
     setup_game_mode(ui, mode)
     show_player_order(ui, @game.active_player)
-    begin_game
+    begin_game(ui)
   end
 
   def play_again(ui)
@@ -39,11 +39,11 @@ class GameManager
   def setup_game_mode(ui, mode)
     case mode
     when 1
-      @game = Game.new(@board, Player.new(get_type(ui), ui, get_hum_name(ui)), Player.new(opponent_type(@player_type), ui, get_second_name(ui)), ui)
+      @game = Game.new(@board, Player.new(get_type(ui), get_hum_name(ui)), Player.new(opponent_type(@player_type), get_second_name(ui)))
     when 2
-      @game = Game.new(@board, Player.new(get_type(ui), ui, get_hum_name(ui)), Ai.new(opponent_type(@player_type), @board, @player_type, ui), ui)
+      @game = Game.new(@board, Player.new(get_type(ui), get_hum_name(ui)), Ai.new(opponent_type(@player_type), @board, @player_type, ui))
     when 3
-      @game = Game.new(@board, Ai.new(@player_type, @board, opponent_type(@player_type), ui, "HAL 9000"), Ai.new(opponent_type(@player_type), @board, @player_type, ui, "Skynet"), ui)
+      @game = Game.new(@board, Ai.new(@player_type, @board, opponent_type(@player_type), "HAL 9000"), Ai.new(opponent_type(@player_type), @board, @player_type, "Skynet"))
     end
   end
 
@@ -99,8 +99,8 @@ class GameManager
     end
   end
 
-  def begin_game
-    @game.start_game
+  def begin_game(ui)
+    @game.start_game(ui)
   end
 
 end
