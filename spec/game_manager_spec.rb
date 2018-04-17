@@ -21,19 +21,19 @@ describe GameManager do
       end
     end
 
-    # context "in a human vs human case" do
-    #   before do
-    #     $stdout.stub(:write)
-    #     allow(game_manager).to receive(:gets).and_return("1","1","Goku","Vegeta","1","1","4","2","5","3")
-    #     allow(game_manager.game.active_player).to receive(:gets).and_return("1","4","2","5","3")
-    #     #game_manager.stub(:gets).and_return("1","1","Goku","Vegeta","1","1","4","2","5","3")
-    #   end
-    #
-    #   it "plays a game until game is over" do
-    #     game_manager.setup_game
-    #     expect(game_manager.board.game_over?).to be(true)
-    #   end
-    # end
+    context "in a human vs human case" do
+      before do
+        $stdout.stub(:write)
+        allow(ui).to receive(:retrieve_input).and_return("1","1","Goku","Vegeta","1","1","4","2","5","3")
+      end
+
+      it "plays a game until game is over" do
+        game_manager.setup_game(ui)
+        expect(game_manager.board.game_over?).to be(true)
+        expect(game_manager.game.active_player.name).to eql("Goku")
+        expect(game_manager.board.game_board).to eql(["X", "X", "X", "O", "O", "6", "7", "8", "9"])
+      end
+    end
 
   end
 end
