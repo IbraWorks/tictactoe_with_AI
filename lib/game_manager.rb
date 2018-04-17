@@ -10,19 +10,19 @@ class GameManager
     @player_type = "X"
   end
 
-  def setup_game
-    intro
-    mode = get_mode
-    setup_game_mode(mode)
-    show_player_order(@game.active_player)
+  def setup_game(ui)
+    intro(ui)
+    mode = get_mode(ui)
+    setup_game_mode(ui, mode)
+    show_player_order(ui, @game.active_player)
     begin_game
   end
 
-  def play_again
-    @ui.play_again_message
-    answer = gets.chomp.to_i
+  def play_again(ui)
+    ui.play_again_message
+    answer = ui.retrieve_input.to_i
     if (answer != 1 && answer != 2)
-      @ui.options_error
+      ui.options_error
       play_again
     else
       return answer
@@ -31,37 +31,37 @@ class GameManager
 
   private
 
-  def intro
-    @ui.title
-    @ui.instructions
+  def intro(ui)
+    ui.title
+    ui.instructions
   end
 
-  def setup_game_mode(mode)
+  def setup_game_mode(ui, mode)
     case mode
     when 1
-      @game = Game.new(@board, Player.new(get_type, @ui, get_hum_name), Player.new(opponent_type(@player_type), @ui, get_second_name), @ui)
+      @game = Game.new(@board, Player.new(get_type(ui), ui, get_hum_name(ui)), Player.new(opponent_type(@player_type), ui, get_second_name(ui)), ui)
     when 2
-      @game = Game.new(@board, Player.new(get_type, @ui, get_hum_name), Ai.new(opponent_type(@player_type), @board, @player_type, @ui), @ui)
+      @game = Game.new(@board, Player.new(get_type(ui), ui, get_hum_name(ui)), Ai.new(opponent_type(@player_type), @board, @player_type, ui), ui)
     when 3
-      @game = Game.new(@board, Ai.new(@player_type, @board, opponent_type(@player_type), @ui, "HAL 9000"), Ai.new(opponent_type(@player_type), @board, @player_type, @ui, "Skynet"), @ui)
+      @game = Game.new(@board, Ai.new(@player_type, @board, opponent_type(@player_type), ui, "HAL 9000"), Ai.new(opponent_type(@player_type), @board, @player_type, ui, "Skynet"), ui)
     end
   end
 
-  def get_mode
-    @ui.pick_the_players
-    mode = gets.chomp.to_i
+  def get_mode(ui)
+    ui.pick_the_players
+    mode = ui.retrieve_input.to_i
     if mode == 1 || mode == 2 || mode == 3
       return mode
     end
-    @ui.options_error
+    ui.options_error
     get_mode
   end
 
-  def get_type
-    @ui.pick_your_type
-    answer = gets.chomp.to_i
+  def get_type(ui)
+    ui.pick_your_type
+    answer = ui.retrieve_input.to_i
     if (answer != 1 && answer != 2)
-      @ui.options_error
+      ui.options_error
       get_type
     end
     @player_type = "X" if answer == 1
@@ -73,26 +73,26 @@ class GameManager
     type == "X" ? "O" : "X"
   end
 
-  def get_hum_name
-    @ui.get_name
-    name = gets.chomp.strip
-    @ui.options_error if name == ""
+  def get_hum_name(ui)
+    ui.get_name
+    name = ui.retrieve_input.strip
+    ui.options_error if name == ""
     name == "" ? get_hum_name : name
   end
 
-  def get_second_name
-    @ui.get_second_name
-    name = gets.chomp.strip
-    @ui.options_error if name == ""
+  def get_second_name(ui)
+    ui.get_second_name
+    name = ui.retrieve_input.strip
+    ui.options_error if name == ""
     name == "" ? get_second_name : name
   end
 
-  def show_player_order(active_player)
-    @ui.show_player_order(active_player)
-    order = gets.chomp.to_i
+  def show_player_order(ui, active_player)
+    ui.show_player_order(active_player)
+    order = ui.retrieve_input.to_i
     if order != 1 && order != 2
-      @ui.options_error
-      show_player_order(active_player)
+      ui.options_error
+      show_player_order(ui, active_player)
     end
     if order == 2
       @game.switch_players

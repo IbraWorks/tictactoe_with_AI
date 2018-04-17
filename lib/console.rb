@@ -89,4 +89,8 @@ class Console
     sleep(seconds)
   end
 
+  def retrieve_input
+    gets.chomp
+  end
+
 end

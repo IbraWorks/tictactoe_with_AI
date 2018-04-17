@@ -83,4 +83,8 @@ class UserInterface
     @type_of_ui.wait(seconds)
   end
 
+  def retrieve_input
+    @type_of_ui.retrieve_input
+  end
+
 end
